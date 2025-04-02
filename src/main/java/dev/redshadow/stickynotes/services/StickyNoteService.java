@@ -29,9 +29,7 @@ public class StickyNoteService {
     }
 
 
-    public List<Stickynote> createStickNote(String content){
-        int posX=randomNumberGenerator(screenDimensionsService.getScreenWidth());
-        int posY=randomNumberGenerator(screenDimensionsService.getScreenHeight());
+    public List<Stickynote> createStickyNote(String content, int posX, int posY){
         Stickynote newStickyNote=new Stickynote(posX,posY,content);
         stickyNoteRepository.save(newStickyNote);
 

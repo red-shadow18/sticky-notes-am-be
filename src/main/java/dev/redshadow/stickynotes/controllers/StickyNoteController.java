@@ -4,6 +4,7 @@ package dev.redshadow.stickynotes.controllers;
 import dev.redshadow.stickynotes.dto.StickyNoteRequestDTO;
 import dev.redshadow.stickynotes.entities.Stickynote;
 import dev.redshadow.stickynotes.services.StickyNoteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +33,8 @@ public class StickyNoteController {
 
     @RequestMapping(method = RequestMethod.POST,
                     value = "/api/saveNewStickyNote")
-    public ResponseEntity<?> addNewStickyNote(@RequestBody StickyNoteRequestDTO content){
-        List<Stickynote> updatedStickyNotes= stickyNoteService.createStickNote(content.getContent());
+    public ResponseEntity<?> addNewStickyNote(@Valid @RequestBody StickyNoteRequestDTO stickyNoteRequest){
+        List<Stickynote> updatedStickyNotes= stickyNoteService.createStickyNote(stickyNoteRequest.getContent(), stickyNoteRequest.getPosX(),stickyNoteRequest.getPosY());
         Map<String,Object> response=new HashMap<>();
         response.put("updatedStickyNotes", updatedStickyNotes);
         response.put("customMessage","New sticky note added successfully");
