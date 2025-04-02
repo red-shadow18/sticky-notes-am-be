@@ -21,8 +21,11 @@ public class StickyNoteController {
 
     @RequestMapping(method = RequestMethod.GET,
             value = "/api/getAllStickyNotes")
-    public List<Stickynote> returnAllStickyNotes(){
-        return stickyNoteService.returnAllStickyNotes();
+    public ResponseEntity<?> returnAllStickyNotes(){
+        List<Stickynote> allStickyNotes=stickyNoteService.returnAllStickyNotes();
+        Map<String,Object> response=new HashMap<>();
+        response.put("allStickyNotes",allStickyNotes);
+        return ResponseEntity.ok(response);
     }
 
     @RequestMapping(method = RequestMethod.GET,
@@ -34,7 +37,7 @@ public class StickyNoteController {
     @RequestMapping(method = RequestMethod.POST,
                     value = "/api/saveNewStickyNote")
     public ResponseEntity<?> addNewStickyNote(@Valid @RequestBody StickyNoteRequestDTO stickyNoteRequest){
-        List<Stickynote> updatedStickyNotes= stickyNoteService.createStickyNote(stickyNoteRequest.getContent(), stickyNoteRequest.getPosX(),stickyNoteRequest.getPosY());
+        List<Stickynote> updatedStickyNotes= stickyNoteService.createStickyNote(stickyNoteRequest.getstickyNoteContent(), stickyNoteRequest.getPosX(),stickyNoteRequest.getPosY());
         Map<String,Object> response=new HashMap<>();
         response.put("updatedStickyNotes", updatedStickyNotes);
         response.put("customMessage","New sticky note added successfully");
@@ -55,8 +58,11 @@ public class StickyNoteController {
     @RequestMapping(method = RequestMethod.PUT,
     value = "/api/updateStickyNote")
     public ResponseEntity<?> updateStickyNote(@RequestBody Stickynote updatedStickyNote){
-        stickyNoteService.updateStickynote( updatedStickyNote);
-        return ResponseEntity.ok("Updated successfully!");
+       List<Stickynote> updatedStickyNotes= stickyNoteService.updateStickynote( updatedStickyNote);
+       Map<String,Object> response=new HashMap<>();
+       response.put("customMessage","Sticky note updated successfully");
+       response.put("updatedStickyNotes",updatedStickyNotes);
+        return ResponseEntity.ok(response);
 
     }
 

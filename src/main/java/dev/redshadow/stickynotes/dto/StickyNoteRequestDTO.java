@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Positive;
 public class StickyNoteRequestDTO {
 
     @NotNull(message = "Can't save note without any content")
-private String content;
+private String stickyNoteContent;
 
     @Positive
 private int posX;
@@ -17,14 +17,14 @@ public StickyNoteRequestDTO(){
 
 }
 
-public StickyNoteRequestDTO(String content, int posX, int posY){
-    this.content=content;
+public StickyNoteRequestDTO(String stickyNoteContent, int posX, int posY){
+    this.stickyNoteContent=stickyNoteContent;
     this.posX=posX;
     this.posY=posY;
     }
 
-    public String getContent() {
-        return content;
+    public String getstickyNoteContent() {
+        return stickyNoteContent;
     }
 
     public int getPosX() {
