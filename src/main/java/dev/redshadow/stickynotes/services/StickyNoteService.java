@@ -29,10 +29,8 @@ public class StickyNoteService {
     }
 
 
-    public List<Stickynote> createStickNote(String content){
-        int posX=randomNumberGenerator(screenDimensionsService.getScreenWidth());
-        int posY=randomNumberGenerator(screenDimensionsService.getScreenHeight());
-        Stickynote newStickyNote=new Stickynote(posX,posY,content);
+    public List<Stickynote> createStickyNote(String stickyNoteContent, int posX, int posY){
+        Stickynote newStickyNote=new Stickynote(posX,posY,stickyNoteContent);
         stickyNoteRepository.save(newStickyNote);
 
         return stickyNoteRepository.findAll();
@@ -53,8 +51,9 @@ public class StickyNoteService {
 
     }
 
-    public void updateStickynote( Stickynote updatedNote){
+    public List<Stickynote> updateStickynote( Stickynote updatedNote){
         stickyNoteRepository.save(updatedNote);
+        return stickyNoteRepository.findAll();
     }
 }
 

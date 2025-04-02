@@ -1,22 +1,37 @@
 package dev.redshadow.stickynotes.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class StickyNoteRequestDTO {
 
-private String content;
+    @NotNull(message = "Can't save note without any content")
+private String stickyNoteContent;
+
+    @Positive
+private int posX;
+    @Positive
+private int posY;
 
 public StickyNoteRequestDTO(){
 
 }
 
-public StickyNoteRequestDTO(String content){
-    this.content=content;
+public StickyNoteRequestDTO(String stickyNoteContent, int posX, int posY){
+    this.stickyNoteContent=stickyNoteContent;
+    this.posX=posX;
+    this.posY=posY;
     }
 
-    public String getContent() {
-        return content;
+    public String getstickyNoteContent() {
+        return stickyNoteContent;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
     }
 }
