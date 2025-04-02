@@ -7,11 +7,14 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
-# Build the application (compiles and creates JAR file)
+# Make mvnw executable (only if using Maven Wrapper)
+RUN chmod +x mvnw
+
+# Build the application (creates JAR file)
 RUN ./mvnw clean package -DskipTests
 
 # Expose application port
 EXPOSE 8080
 
-# Run the application
-CMD ["java", "-jar", "target/*.jar"]
+# Find the built JAR file and run it
+CMD ["sh", "-c", "java -jar target/*.jar"]
