@@ -1,14 +1,20 @@
-# Use OpenJDK 17 as the base image
-FROM eclipse-temurin:17
+# Use OpenJDK 17 as base image
+FROM eclipse-temurin:17-jdk
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the built JAR file into the container
-COPY target/*.jar app.jar  # Use `build/libs/*.jar` for Gradle
+# Copy project files
+COPY . .
 
-# Expose the application port
+# Make mvnw executable (only if using Maven Wrapper)
+RUN chmod +x mvnw
+
+# Build the application (creates JAR file)
+RUN ./mvnw clean package -DskipTests
+
+# Expose application port
 EXPOSE 8080
 
-# Run the JAR file
-CMD ["java", "-jar", "app.jar"]
+# Find the built JAR file and run it
+CMD ["sh", "-c", "java -jar target/*.jar"]
