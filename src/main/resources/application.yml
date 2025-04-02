@@ -2,10 +2,9 @@ server:
   port: 8081
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/stickyNotes
-
-    username: postgres
-    password: 1111
+    url: jdbc:postgresql://dpg-cvmitfa4d50c73fvrjjg-a.oregon-postgres.render.com/redshadow18db
+    username: redshadow18
+    password: uO125Edc7x2zGO7PVxH0G05ugl15ysKY
     driver-class-name: org.postgresql.Driver
 
 
